@@ -2,6 +2,7 @@ package com.example.securingweb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -12,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig {
 
 	@Bean
@@ -44,7 +46,7 @@ public class WebSecurityConfig {
 
 		UserDetails user2 =
 			User.withDefaultPasswordEncoder()
-			   	.username("admin")
+			   	.username("adminb")
 			   	.password("password")
 			   	.roles("USER","ADMIN")
 			   	.build();

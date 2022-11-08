@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>securing-web-complete</artifactId>
+	<artifactId>spring-jwt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>securing-web-complete</name>
+	<name>spring-jwt</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -51,11 +51,24 @@
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 			<version>3.0.4.RELEASE</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
 		</dependency>
 	</dependencies>
 
@@ -103,7 +116,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.example.securingweb.SecuringWebApplication</mainClass>
+                            <mainClass>com.example.securingweb.JwtWebApplication</mainClass>
                         </manifest>
                     </archive>
 					<descriptorRefs>
@@ -129,8 +142,8 @@
         <profile>
             <id>jrebel</id>
             <properties>
-<!--				<boot.jvm.args>${boot.jvm.memory} ${debug.args} ${jrebel.agent.args}</boot.jvm.args>-->
-				<boot.jvm.args>${boot.jvm.memory} ${debug.args} </boot.jvm.args>
+<!--                <boot.jvm.args>${boot.jvm.memory} ${debug.args} ${jrebel.agent.args}</boot.jvm.args>-->
+				<boot.jvm.args>${boot.jvm.memory} ${debug.args}</boot.jvm.args>
             </properties>
         </profile>
     </profiles>

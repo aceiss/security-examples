@@ -1,5 +1,6 @@
 package com.example.securingweb.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,22 +30,21 @@ public class MainController {
   // Login form
   @RequestMapping(value = "/admin" , method = {RequestMethod.GET, RequestMethod.POST})
   @PreAuthorize("hasRole('ADMIN') || hasRole('SUP_ADMIN')")
+//@Secured({"ROLE_ADMIN","ROLE_SUP_ADMIN"})
   public String admin() {
-//    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//    if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-//      return "admin.html";
-//    }
     return "admin.html";
   }
 
   // Login form
   @RequestMapping(value = "/catalog" , method = {RequestMethod.GET, RequestMethod.POST})
+  @Secured({"ROLE_ADMIN","ROLE_CATALOG"})
   public String catalog() {
     return "catalog.html";
   }
 
   // Login form
   @RequestMapping(value = "/home" , method = {RequestMethod.GET, RequestMethod.POST})
+  @Secured({"ROLE_USER"})
   public String home() {
     return "home.html";
   }
