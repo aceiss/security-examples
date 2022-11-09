@@ -21,7 +21,8 @@ public class WebSecurityConfig {
 		http
 			.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests((requests) -> requests
-				.antMatchers("/", "/home").permitAll()
+				.antMatchers("/").permitAll()
+				.antMatchers("/home").hasRole("USER")
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/catalog/**").hasRole("CATALOG_MGR")
 				.anyRequest().authenticated()
