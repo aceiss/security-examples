@@ -2,6 +2,7 @@ package com.example.securingweb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,20 +23,26 @@ public class WebSecurityConfig {
 			.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests((requests) -> requests
 				.antMatchers("/").permitAll()
+				.antMatchers(HttpMethod.GET, "/register.html").permitAll()
+				.antMatchers(HttpMethod.POST, "/register").permitAll()
 				.antMatchers("/home").hasRole("USER")
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/catalog/**").hasRole("CATALOG_MGR")
 				.anyRequest().authenticated()
 			)
+
 			.formLogin((form) -> form
 				.loginPage("/login")
 				.permitAll()
 			)
-			.logout((logout) -> logout.permitAll());
+			.logout((logout) -> logout.permitAll())
+		;
 
 		return http.build();
 	}
 
+
+/*
 	@Bean
 	public UserDetailsService userDetailsService() {
 		UserDetails user =
@@ -49,7 +56,7 @@ public class WebSecurityConfig {
 			User.withDefaultPasswordEncoder()
 			   	.username("adminb")
 			   	.password("password")
-			   	.roles("USER","ADMIN")
+			   	.roles("USER","ADMIN","CATALOG_MGR")
 			   	.build();
 
 	    UserDetails user3 =
@@ -61,4 +68,5 @@ public class WebSecurityConfig {
    
 		return new InMemoryUserDetailsManager(user, user2, user3);
 	}
+*/
 }
