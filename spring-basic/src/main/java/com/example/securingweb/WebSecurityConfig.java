@@ -22,6 +22,7 @@ public class WebSecurityConfig {
 		http
 			.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests((requests) -> requests
+				.antMatchers("/h2-console/**").permitAll()
 				.antMatchers("/").permitAll()
 				.antMatchers(HttpMethod.GET, "/register.html").permitAll()
 				.antMatchers(HttpMethod.POST, "/register").permitAll()
@@ -36,7 +37,8 @@ public class WebSecurityConfig {
 				.permitAll()
 			)
 			.logout((logout) -> logout.permitAll())
-		;
+			.headers().frameOptions().disable()
+			;
 
 		return http.build();
 	}
