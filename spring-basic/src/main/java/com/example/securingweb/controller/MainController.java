@@ -4,8 +4,13 @@ import com.example.securingweb.h2.Role;
 import com.example.securingweb.h2.RoleRepository;
 import com.example.securingweb.h2.User;
 import com.example.securingweb.h2.UserAccountRepository;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +74,16 @@ public class MainController {
 
   // Login form
   @RequestMapping(value = "/home" , method = {RequestMethod.GET, RequestMethod.POST})
-  public String home() {
+  public String home(Model model, SecurityContextHolder contextHolder) {
+    Authentication authentication = contextHolder.getContext().getAuthentication();
+    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+    Gson gson = new GsonBuilder()
+            .serializeNulls()
+            .create();
+
+    model.addAttribute("jsonText", gson.toJson(userDetails));
+
     return "home.html";
   }
 

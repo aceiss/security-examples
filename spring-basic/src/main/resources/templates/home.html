@@ -5,7 +5,8 @@
     </head>
     <body>
         <h1>Welcome!</h1>
-        
+        <h2><p th:utext="${jsonText}"></p></h2>
+
         <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
         <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
             <p>Click <a th:href="@{/register}">here</a> to see the registration page.</p>
