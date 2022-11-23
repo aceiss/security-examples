@@ -31,23 +31,24 @@ services:
     image: tomcat:9
     volumes:
       - ./target/WebappSpringSecurity-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/WebappSpringSecurity.war
-      - ./target:/agent
+      #../../javaagent/agent/build/libs is the location of where the java agent is located.
+      - ../../javaagent/agent/build/libs:/agent
     ports:
-      - '8082:8080'
+      - '8080:8080'
     environment:
       - MYSQL_ROOT_PASSWORD=Quelea99#
       - MYSQL_ROOT_USER=root
       - ACEISS_API_KEY=sdfx.dcYMrPZZEzc9lhL6oUDj2P5vKDrCT1dsDxPOGzf1ARDSxQu-GixL2D8z2FwHzzj0M5uwj7NJauc4sljyu2MlwsMgrtl74oWzZb35iLLtsBWS8Uy2bQWiDRDuCT2ZVtm0sztWYiTX5ZPsMoLYpUZie2tIMpyMNU1z9La_ejxXm4oX9MDZB_L88KMUlfAjgEwcOIHX5n-jwJVwdcVuuZfDGYwFWGtk0_RtlyWFsmWa9UY6hhSIk_yFnxGNjEMxYMnRWdVmSCXJjNkF10jRWNUgFr9B4Ou7YTDeUqTg
-      - ACEISS_API_ENDPOINT=http://192.168.56.1:4318/
-      - JAVA_OPTS=-javaagent:/agent/aceiss-javaagent-1.0.jar
+      - ACEISS_API_ENDPOINT=http://172.29.95.99:4318/
+      - JAVA_OPTS=-javaagent:/agent/aceiss-javaagent.jar
 
-  otel-collector:
-#    image: https://github.com/aceiss/collector/blob/main/release/aceiss-collector-windows-0.61.0.exe:latest
-    image: aceiss/collector:latest
-    command: [ "--config=/etc/config.yml" ]
-    volumes:
-      - ./config.yml:/etc/config.yml
-    ports:
-      - "4318:4318"
+#  otel-collector:
+##    image: https://github.com/aceiss/collector/blob/main/release/aceiss-collector-windows-0.61.0.exe:latest
+#    image: aceiss/collector:latest
+#    command: [ "--config=/etc/config.yml" ]
+#    volumes:
+#      - ./config.yml:/etc/config.yml
+#    ports:
+#      - "4318:4318"
 
 

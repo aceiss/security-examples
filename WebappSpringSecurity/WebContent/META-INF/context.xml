@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/" docBase="./WebappSpringSecurity">
+    
+    <Resource name="jdbc/MyLocalDB" 
+              global="jdbc/MyDB" 
+              auth="Container" 
+              type="javax.sql.DataSource" 
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://db:3306/UserDB"
+              username="UserDB"
+              password="UserDB"
+              maxTotal="20" maxIdle="10" />
+
+</Context>
