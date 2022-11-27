@@ -44,12 +44,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate").permitAll()
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .successForwardUrl("/home")
+                        .permitAll()
+                )
+                .authorizeRequests()
+                    .antMatchers("/authenticate").permitAll()
+                    .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        ;
+        http.headers().frameOptions().disable();
+
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }
 }

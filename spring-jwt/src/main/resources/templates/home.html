@@ -13,7 +13,7 @@
         <div th:if="${#authorization.expression('hasRole(''ERIC'')')}">
             <p>Click <a th:href="@{/eric}">here</a> to see the eric page.</p>
         </div>
-        <div th:if="${#authorization.expression('hasRole(''CATALOG'')')}">
+        <div th:if="${#authorization.expression('hasRole(''CATALOG_MGR'')')}">
             <p>Click <a th:href="@{/catalog}">here</a> to see the catalog page.</p>
         </div>
 
