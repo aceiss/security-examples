@@ -85,7 +85,11 @@ public class MainController {
     Role role = new Role();
     role.setUsername(username);
     role.setRole("ADMIN");
+    Role role2 = new Role();
+    role2.setUsername(username);
+    role2.setRole("USER");
     userAccountRepository.save(userAccount);
+    roleRepository.save(role2);
     return roleRepository.save(role);
   }
 
