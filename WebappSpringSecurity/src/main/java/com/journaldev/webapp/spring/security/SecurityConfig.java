@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import com.journaldev.webapp.spring.dao.AppUserDetailsServiceDAO;
 
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -24,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// auth.inMemoryAuthentication().withUser("pankaj").password("pankaj123").roles("USER");
 
 		// using custom UserDetailsService DAO
-		// auth.userDetailsService(new AppUserDetailsServiceDAO());
+	    auth.userDetailsService(new AppUserDetailsServiceDAO());
 
 		// using JDBC
 		Context ctx = new InitialContext();
