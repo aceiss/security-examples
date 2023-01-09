@@ -26,9 +26,9 @@ public class WebSecurityConfig {
 				.antMatchers("/").permitAll()
 				.antMatchers(HttpMethod.GET, "/register.html").permitAll()
 				.antMatchers(HttpMethod.POST, "/register").permitAll()
-				.antMatchers("/home").hasRole("USER")
-				.antMatchers("/admin/**").hasRole("ADMIN")
-				.antMatchers("/catalog/**").hasRole("CATALOG_MGR")
+//				.antMatchers("/home").hasRole("USER")
+//				.antMatchers("/admin/**").hasRole("ADMIN")
+//				.antMatchers("/catalog/**").hasRole("CATALOG_MGR")
 				.anyRequest().authenticated()
 			)
 
