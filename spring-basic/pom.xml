@@ -20,7 +20,7 @@
 		<!--/Users/EricB/aceiss/opentelemetry-java/aceiss-javaagent-1.0.jar-->
 		<debug.port>8089</debug.port>
 <!--		<agent.args>-javaagent:/Users/EricB/aceiss/opentelemetry-java/aceiss-javaagent-1.0.jar</agent.args>-->
-		<agent.args>-javaagent:/Users/EricB/aceiss/javaagent/agent/build/libs/aceiss-javaagent.jar</agent.args>
+		<agent.args>-javaagent:/Users/EricB/aceiss/mac/javaagent/agent/build/libs/aceiss-javaagent.jar</agent.args>
 		<debug.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=${debug.port}</debug.args>
 		<boot.jvm.memory>-Xmx1536M</boot.jvm.memory>
 		<!-- <boot.jvm.args>${agent.args} ${boot.jvm.memory} ${debug.args}</boot.jvm.args> -->

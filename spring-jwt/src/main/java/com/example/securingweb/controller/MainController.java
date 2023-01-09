@@ -65,6 +65,12 @@ public class MainController {
     return "catalog.html";
   }
 
+  @RequestMapping(value = "/user" , method = {RequestMethod.GET, RequestMethod.POST})
+  @Secured({"ROLE_USER"})
+  public String user() {
+    return "user.html";
+  }
+
   // Login form
   @RequestMapping(value = "/home" , method = {RequestMethod.GET, RequestMethod.POST})
   @Secured({"ROLE_USER"})

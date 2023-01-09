@@ -73,6 +73,13 @@ public class MainController {
   }
 
   // Login form
+  @PreAuthorize("hasRole('USER')")
+  @RequestMapping(value = "/user" , method = {RequestMethod.GET, RequestMethod.POST})
+  public String user() {
+    return "user.html";
+  }
+
+  // Login form
   @RequestMapping(value = "/home" , method = {RequestMethod.GET, RequestMethod.POST})
   public String home(Model model, SecurityContextHolder contextHolder) {
     Authentication authentication = contextHolder.getContext().getAuthentication();
