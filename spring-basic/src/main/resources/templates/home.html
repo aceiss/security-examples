@@ -19,6 +19,10 @@
             <p>Click <a th:href="@{/user}">here</a> to see the user page.</p>
         </div>
 
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
         <!--        <p>Click <a th:href="@{/admin}">here</a> to see the admin page.</p>-->
 <!--        <p>Click <a th:href="@{/catalog}">here</a> to see the catalog page.</p>-->
 
