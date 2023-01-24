@@ -1,9 +1,7 @@
 package com.example.securingweb.controller;
 
-import com.example.securingweb.h2.Role;
-import com.example.securingweb.h2.RoleRepository;
-import com.example.securingweb.h2.User;
-import com.example.securingweb.h2.UserAccountRepository;
+import com.example.securingweb.WebSecurityConfig;
+import com.example.securingweb.h2.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,10 +37,22 @@ public class MainController {
   @Autowired
   private final PasswordEncoder passwordEncoder;
 
-  public MainController(UserAccountRepository userAccountRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+  @Autowired
+  private final DatabaseUserDetailsService databaseUserDetails;
+
+  @Autowired
+  private final WebSecurityConfig webSecurityConfig;
+
+//  @Autowired
+//  private final JdbcUserDetailsManager detailsManager;
+
+  public MainController(UserAccountRepository userAccountRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, DatabaseUserDetailsService authenticationProvider, WebSecurityConfig webSecurityConfig) {
     this.userAccountRepository = userAccountRepository;
     this.roleRepository = roleRepository;
     this.passwordEncoder = passwordEncoder;
+    this.databaseUserDetails = authenticationProvider;
+    this.webSecurityConfig = webSecurityConfig;
+//    this.detailsManager = detailsManager;
   }
 
   // Login form
@@ -92,6 +103,37 @@ public class MainController {
     model.addAttribute("jsonText", gson.toJson(userDetails));
 
     return "home.html";
+  }
+
+  @RequestMapping(value = "/listUsers" , method = {RequestMethod.GET, RequestMethod.POST})
+  @PreAuthorize("hasRole('ADMIN') || hasRole('SUP_ADMIN')")
+  public String listUsers(Model model) {
+
+//    webSecurityConfig.securityFilterChain().getFilters().;
+    String sql = "SELECT * FROM `Employees`";
+/*
+
+    List<Map<String, Object>> users = detailsManager.getJdbcTemplate().queryForList( sql );
+//Call userdetailservice for each user get details/granted authorities. + extended data is a plus
+    if (users != null && users.size() >0) {
+      System.out.println("Users In Group size " + users.size());
+      Gson gson = new GsonBuilder()
+              .serializeNulls()
+              .create();
+
+      System.out.println("Users In Group " + gson.toJson(users));
+    }
+*/
+
+    List<User> userList = userAccountRepository.findAll();
+    for(User user : userList){
+      UserDetails details = databaseUserDetails.loadUserByUsername(user.getUsername());
+      System.out.println (details.getAuthorities());
+    }
+
+    model.addAttribute("users",userAccountRepository.findAll());
+
+    return "listUsers.html";
   }
 
   @RequestMapping(value = "/register" , method = {RequestMethod.GET})

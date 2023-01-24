@@ -11,6 +11,7 @@
         <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
             <p>Click <a th:href="@{/register}">here</a> to see the registration page.</p>
             <p>Click <a th:href="@{/admin}">here</a> to see the admin page.</p>
+            <p>Click <a th:href="@{/listUsers}">here</a> to see the list users page.</p>
         </div>
         <div th:if="${#authorization.expression('hasRole(''CATALOG_MGR'')')}">
             <p>Click <a th:href="@{/catalog}">here</a> to see the catalog page.</p>
