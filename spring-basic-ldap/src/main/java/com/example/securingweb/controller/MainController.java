@@ -5,12 +5,16 @@ import com.example.securingweb.h2.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ldap.core.DirContextAdapter;
+import org.springframework.ldap.core.DirContextOperations;
+import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import javax.naming.Name;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping(value="/")
@@ -37,22 +37,24 @@ public class MainController {
   @Autowired
   private final PasswordEncoder passwordEncoder;
 
-  @Autowired
-  private final DatabaseUserDetailsService databaseUserDetails;
 
   @Autowired
   private final WebSecurityConfig webSecurityConfig;
 
+  @Autowired
+  private final LdapTemplate ldapTemplate;
+
+  public static final String BASE_DN = "dc=springframework,dc=org";
+
 //  @Autowired
 //  private final JdbcUserDetailsManager detailsManager;
 
-  public MainController(UserAccountRepository userAccountRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, DatabaseUserDetailsService authenticationProvider, WebSecurityConfig webSecurityConfig) {
+  public MainController(UserAccountRepository userAccountRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, WebSecurityConfig webSecurityConfig, LdapTemplate ldapTemplate) {
     this.userAccountRepository = userAccountRepository;
     this.roleRepository = roleRepository;
     this.passwordEncoder = passwordEncoder;
-    this.databaseUserDetails = authenticationProvider;
     this.webSecurityConfig = webSecurityConfig;
-//    this.detailsManager = detailsManager;
+    this.ldapTemplate = ldapTemplate;
   }
 
   // Login form
@@ -109,28 +111,6 @@ public class MainController {
   @PreAuthorize("hasRole('ADMIN') || hasRole('SUP_ADMIN')")
   public String listUsers(Model model) {
 
-//    webSecurityConfig.securityFilterChain().getFilters().;
-    String sql = "SELECT * FROM `Employees`";
-/*
-
-    List<Map<String, Object>> users = detailsManager.getJdbcTemplate().queryForList( sql );
-//Call userdetailservice for each user get details/granted authorities. + extended data is a plus
-    if (users != null && users.size() >0) {
-      System.out.println("Users In Group size " + users.size());
-      Gson gson = new GsonBuilder()
-              .serializeNulls()
-              .create();
-
-      System.out.println("Users In Group " + gson.toJson(users));
-    }
-*/
-
-    List<User> userList = userAccountRepository.findAll();
-    for(User user : userList){
-      UserDetails details = databaseUserDetails.loadUserByUsername(user.getUsername());
-      System.out.println (details.getAuthorities());
-    }
-
     model.addAttribute("users",userAccountRepository.findAll());
 
     return "listUsers.html";
@@ -149,13 +129,38 @@ public class MainController {
     userAccount.setLastName(lastName);
     userAccount.setAddress(address);
     userAccount.setUsername(username);
-    userAccount.setPassword(passwordEncoder.encode(password));
+    String userPassword = passwordEncoder.encode(password);
     userAccount.setEnabled("1");
     Role role = new Role();
     role.setUsername(username);
     role.setRole("ADMIN");
+    createLdapEntry(userAccount,userPassword);
     userAccountRepository.save(userAccount);
     return roleRepository.save(role);
+  }
+
+  public void createLdapEntry(User u, String pwd) {
+    Name dn = buildDn(u);
+    DirContextAdapter context = new DirContextAdapter(dn);
+
+    context.setAttributeValues("objectclass", new String[] {"top", "person","organizationalPerson","inetOrgPerson"});
+    mapToContext(u, pwd, context);
+    ldapTemplate.bind(context);
+  }
+
+  protected Name buildDn(User u) {
+
+    return LdapNameBuilder.newInstance(BASE_DN)
+            .add("ou", "people")
+            .add("uid", u.getUsername())
+            .build();
+  }
+
+  protected void mapToContext (User u, String pwd, DirContextOperations context) {
+    context.setAttributeValue("cn", u.getFirstName() + " " + u.getLastName());
+    context.setAttributeValue("sn", u.getLastName());
+    context.setAttributeValue("uid", u.getUsername());
+    context.setAttributeValue("userPassword", pwd);
   }
 
 }

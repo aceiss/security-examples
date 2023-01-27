@@ -1,21 +1,30 @@
 package com.example.securingweb;
 
+import com.example.securingweb.h2.UserAccountRepository;
+import com.example.securingweb.ldap.CustomAuthoritiesPopulator;
+import com.example.securingweb.ldap.CustomUserDetailsMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig {
+
+	private final UserAccountRepository userAccountRepository;
+
+	public WebSecurityConfig(UserAccountRepository userAccountRepository) {
+		this.userAccountRepository = userAccountRepository;
+	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -44,32 +53,20 @@ public class WebSecurityConfig {
 		return http.build();
 	}
 
-
-/*
-	@Bean
-	public UserDetailsService userDetailsService() {
-		UserDetails user =
-			User.withDefaultPasswordEncoder()
-				.username("user")
-				.password("password")
-				.roles("USER")
-				.build();
-
-		UserDetails user2 =
-			User.withDefaultPasswordEncoder()
-			   	.username("adminb")
-			   	.password("password")
-			   	.roles("USER","ADMIN","CATALOG_MGR")
-			   	.build();
-
-	    UserDetails user3 =
-		    User.withDefaultPasswordEncoder()
-			   	.username("catmgr")
-			   	.password("password")
-			   	.roles("USER","CATALOG_MGR")
-			   	.build();
-   
-		return new InMemoryUserDetailsManager(user, user2, user3);
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth
+				// https://spring.io/guides/gs/authenticating-ldap/
+				.ldapAuthentication()
+				.ldapAuthoritiesPopulator(new CustomAuthoritiesPopulator(userAccountRepository))
+				.userDetailsContextMapper(new CustomUserDetailsMapper())
+				.userDnPatterns("uid={0},ou=people")
+				.groupSearchBase("ou=groups")
+				.contextSource()
+				.url("ldap://localhost:8389/dc=springframework,dc=org")
+				.and()
+				.passwordCompare()
+				.passwordEncoder(new BCryptPasswordEncoder())
+				.passwordAttribute("userPassword");;
 	}
-*/
 }

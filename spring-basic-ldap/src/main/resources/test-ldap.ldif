@@ -34,32 +34,32 @@ objectclass: top
 objectclass: organizationalUnit
 ou: otherpeople
 
-dn: uid=ben,ou=people,dc=springframework,dc=org
+dn: uid=user,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Ben Alex
 sn: Alex
-uid: ben
-userPassword: $2a$10$fG1Exub7ZNNiNJm10LBJ3eKDh.OLMMmZliYWpohaY.uNTy.cnDi.a
+uid: user
+userPassword: $2a$10$8bUzf2SwvJiyTnP0Q46mcOUVbso5VTeoRJGMq63Nhezc6INEDGu/.
 
-dn: uid=andy,ou=people,dc=springframework,dc=org
+dn: uid=admin,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Andy Hamilton
 sn: Hamilton
-uid: Andy
-userPassword: $2a$10$.nJ7gcBkJCdzymWkwUYieuxsyjJAr0rEUlPFaOqSvIbBZ82RSg/Hu
+uid: admin
+userPassword: $2a$10$8bUzf2SwvJiyTnP0Q46mcOUVbso5VTeoRJGMq63Nhezc6INEDGu/.
 
-dn: uid=eric,ou=people,dc=springframework,dc=org
+dn: uid=catmgr,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Eric Allen
 sn: Allen
-uid: Eric
-userPassword: $2a$10$fG1Exub7ZNNiNJm10LBJ3eKDh.OLMMmZliYWpohaY.uNTy.cnDi.a
+uid: catmgr
+userPassword: $2a$10$8bUzf2SwvJiyTnP0Q46mcOUVbso5VTeoRJGMq63Nhezc6INEDGu/.
