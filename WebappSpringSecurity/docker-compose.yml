@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   db:
-    image: mysql:5.7
+    image: arm64v8/mysql:latest
     restart: unless-stopped
     ports:
       - "3306:3306"
@@ -39,8 +39,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=Quelea99#
       - MYSQL_ROOT_USER=root
-      - ACEISS_API_KEY=sdfx.dcYMrPZZEzc9lhL6oUDj2P5vKDrCT1dsDxPOGzf1ARDSxQu-GixL2D8z2FwHzzj0M5uwj7NJauc4sljyu2MlwsMgrtl74oWzZb35iLLtsBWS8Uy2bQWiDRDuCT2ZVtm0sztWYiTX5ZPsMoLYpUZie2tIMpyMNU1z9La_ejxXm4oX9MDZB_L88KMUlfAjgEwcOIHX5n-jwJVwdcVuuZfDGYwFWGtk0_RtlyWFsmWa9UY6hhSIk_yFnxGNjEMxYMnRWdVmSCXJjNkF10jRWNUgFr9B4Ou7YTDeUqTg
-      - ACEISS_API_ENDPOINT=http://172.29.95.99:4318/
+      - ACEISS_API_KEY=fwZ8shQolBJt3b-WXSk3eEzqwyZpsvVLXm5UpL.Y1wZdFW8q9sId27967KS0KJODqGHXV2qt3Q4bmGHhqtrgT9MJqXhmSOXqtRT1UQAYh8MNZGR_mrJ9Nfzxsas_-Gr0WAI1W-m7ayiYw2SpsVYt2SQDM2R0ANlsN29QMmecZUTMETxypNTbdnjMGimLLdJK28kketQWYdJNtgVnFOXy6sHMol3V_L9fGZj-ZD0HdIl0ZwsV5MJ-eE6m3rygdiGutLgDGk5OOQAjjhh9t0i2Y_wqZcV62GDUaAxOtHwH3
+      - ACEISS_API_ENDPOINT=http://192.168.1.159:4318/
       - JAVA_OPTS=-javaagent:/agent/aceiss-javaagent.jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8089
 
 #  otel-collector:

@@ -248,7 +248,20 @@ INSERT INTO `Roles` (`username`, `role`) VALUES
 ('thijs.watkins', 'Role D'),
 ('velizar.melia', 'Role C'),
 ('wendy.lax', 'Role C'),
-('wendy.lax', 'Role D');
+('wendy.lax', 'Role D'),
+('aaron.edwards', 'Role B'),
+('carolyn.raileanu', 'Role B'),
+('danny.aldridge', 'Role B'),
+('libby.sinclair', 'Role B'),
+('lydia.paolino', 'Role B'),
+('mathew.ward', 'Role B'),
+('max.polmeer', 'Role B'),
+('oluwasolape.whitelan', 'Role B'),
+('ramakanta.wynnesmyth', 'Role B'),
+('tahsin.cartlidge', 'Role B'),
+('tuuli.peranic', 'Role B'),
+('sinclair.sherwood', 'Role B')
+;
 
 
 ALTER TABLE `Employees`
