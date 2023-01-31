@@ -4,6 +4,7 @@ import com.aceiss.testapp.domain.PersistentToken;
 import com.aceiss.testapp.domain.User;
 import com.aceiss.testapp.repository.PersistentTokenRepository;
 import com.aceiss.testapp.repository.UserRepository;
+import com.aceiss.testapp.security.AuthoritiesConstants;
 import com.aceiss.testapp.security.SecurityUtils;
 import com.aceiss.testapp.service.MailService;
 import com.aceiss.testapp.service.UserService;
@@ -21,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -69,6 +71,7 @@ public class AccountResource {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
     public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
         if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
@@ -110,6 +113,7 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user couldn't be returned.
      */
     @GetMapping("/account")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
     public AdminUserDTO getAccount() {
         return userService
             .getUserWithAuthorities()
@@ -167,6 +171,7 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the current open sessions couldn't be retrieved.
      */
     @GetMapping("/account/sessions")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.CATALOG + "\")")
     public List<PersistentToken> getCurrentSessions() {
         return persistentTokenRepository.findByUser(
             userRepository

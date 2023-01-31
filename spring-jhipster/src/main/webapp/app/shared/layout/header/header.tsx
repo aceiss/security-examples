@@ -11,6 +11,7 @@ import { AdminMenu, EntitiesMenu, AccountMenu } from '../menus';
 export interface IHeaderProps {
   isAuthenticated: boolean;
   isAdmin: boolean;
+  isCatalog: boolean;
   ribbonEnv: string;
   isInProduction: boolean;
   isOpenAPIEnabled: boolean;
