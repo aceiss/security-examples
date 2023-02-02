@@ -109,8 +109,9 @@ export const RegisterPage = () => {
             <a className="alert-link">sign in</a>
             <span>
               , you can try the default accounts:
-              <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;) <br />- User (login=&quot;user&quot; and
-              password=&quot;user&quot;).
+              <br />- Administrator (login=&quot;admin&quot; and password=&quot;password&quot;) <br />- User (login=&quot;user&quot; and
+              password=&quot;password&quot;) <br />- Catalog Mgr (login=&quot;catmgr&quot; and
+              password=&quot;password&quot;).
             </span>
           </Alert>
         </Col>

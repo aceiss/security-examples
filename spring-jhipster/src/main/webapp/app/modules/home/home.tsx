@@ -31,8 +31,9 @@ export const Home = () => {
                 sign in
               </Link>
               , you can try the default accounts:
-              <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;) <br />- User (login=&quot;user&quot; and
-              password=&quot;user&quot;).
+              <br />- Administrator (login=&quot;admin&quot; and password=&quot;password&quot;) <br />- User (login=&quot;user&quot; and
+              password=&quot;password&quot;) <br />- Catalog Mgr (login=&quot;catmgr&quot; and
+              password=&quot;password&quot;).
             </Alert>
 
             <Alert color="warning">
