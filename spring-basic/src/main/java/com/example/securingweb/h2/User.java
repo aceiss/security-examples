@@ -24,7 +24,8 @@ public class User {
     @Column(nullable = false, length = 2)
     private String enabled;
 
-    @OneToMany (fetch = FetchType.EAGER)
+    //    @OneToMany (fetch = FetchType.EAGER)
+    @OneToMany (fetch = FetchType.LAZY)
     @JoinColumn(name="username")
     private List<Role> userRoles;
 
