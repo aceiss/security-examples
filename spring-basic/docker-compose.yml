@@ -1,0 +1,17 @@
+version: '3'
+services:
+  app:
+    image: openjdk:11-jre-slim
+    ports:
+      - target: 8080
+        published: ${HOST_PORT}
+        protocol: tcp
+        mode: host
+
+    environment:
+      - ACEISS_API_KEY=${ACEISS_API_KEY}
+      - ACEISS_USER_LIST_REFRESH_DELAY=${ACEISS_USER_LIST_REFRESH_DELAY}
+    volumes:
+      - ${ACEISS_AGENT_PATH}:/agent
+      - ./target/spring-io-security-jar-with-dependencies.jar:/app/app.jar
+    command: ["java", "-javaagent:/agent/aceiss-javaagent.jar", "-jar", "/app/app.jar"]
