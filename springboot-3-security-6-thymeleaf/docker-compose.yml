@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: openjdk:21-slim
+    image: openjdk:latest
     ports:
       - target: 8080
         published: ${HOST_PORT}
