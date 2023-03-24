@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export ACEISS_API_KEY=yrVxiiYirCWSmayijuXnx1alq3EyUd1MJRsNp5V1XUzxTB5wYedkvLOye2dNGSypJQgjkqyxMM2YR-ORRGe0TdNV8YdUG1pkLwMMh2cD42YyZV3FpR3iCQuHZS-G2mGCt4WmNX_90_Xs5ukHFWN9ASUVJKvl8EIf0wGTtN4EYU809CaqY5j2HLXTktTD7EeME0zZDnJ35gvmfwRvdQgFKdkO5sox7tGQOUZGZTu4KqFVKPmMW0sfxE2dMuykzjr4OVLT-0wzLYMFTW.Q1GMQdNfWlls1_lI6gCW2Ni2XM
+export ACEISS_AGENT_PATH=/Users/EricB/aceiss/mac/javaagent/agent/build/libs
+export HOST_PORT=8080
+export ACEISS_USER_LIST_REFRESH_DELAY=300
+export ACEISS_API_ENDPOINT=http://localhost:4318/
+docker-compose up
