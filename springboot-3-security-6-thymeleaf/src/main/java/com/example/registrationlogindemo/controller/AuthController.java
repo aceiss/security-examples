@@ -25,7 +25,7 @@ public class AuthController {
     @GetMapping("/index")
     @PreAuthorize("hasRole('USER')")
     public String home(){
-        return "index";
+        return "index.html";
     }
 
 //    @RolesAllowed({ "ROLE_CATALOG_MGR", "ROLE_ADMIN" })
@@ -37,7 +37,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "login";
+        return "login.html";
     }
 
     @PreAuthorize("hasRole('ADMIN') || hasRole('SUP_ADMIN')")
@@ -59,7 +59,7 @@ public class AuthController {
     public String showRegistrationForm(Model model){
         UserDto user = new UserDto();
         model.addAttribute("user", user);
-        return "register";
+        return "register.html";
     }
 
     // handler method to handle register user form submit request
@@ -73,7 +73,7 @@ public class AuthController {
         }
         if (result.hasErrors()) {
             model.addAttribute("user", user);
-            return "register";
+            return "register.html";
         }
         userService.saveUser(user);
         return "redirect:/register?success";
@@ -84,6 +84,6 @@ public class AuthController {
     public String listRegisteredUsers(Model model){
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
-        return "listUsers";
+        return "listUsers.html";
     }
 }
