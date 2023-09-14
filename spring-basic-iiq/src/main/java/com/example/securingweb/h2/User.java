@@ -24,6 +24,9 @@ public class User {
     @Column(nullable = false, length = 300)
     private String email;
 
+    @Column(nullable = false, length = 300)
+    private String name;
+
     @Column(nullable = false, length = 2)
     private String enabled;
 
@@ -78,6 +81,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean isEnabled() {

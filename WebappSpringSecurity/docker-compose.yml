@@ -14,7 +14,7 @@ services:
       - MYSQL_ROOT_USER=root
       - MYSQL_USER=UserDB
       - MYSQL_PASSWORD=UserDB
-
+# To get to php admin http://localhost:8081/index.php?route=/&route=%2F
 
   phpmyadmin:
     depends_on:
@@ -39,7 +39,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=Quelea99#
       - MYSQL_ROOT_USER=root
-      - ACEISS_API_KEY=fwZ8shQolBJt3b-WXSk3eEzqwyZpsvVLXm5UpL.Y1wZdFW8q9sId27967KS0KJODqGHXV2qt3Q4bmGHhqtrgT9MJqXhmSOXqtRT1UQAYh8MNZGR_mrJ9Nfzxsas_-Gr0WAI1W-m7ayiYw2SpsVYt2SQDM2R0ANlsN29QMmecZUTMETxypNTbdnjMGimLLdJK28kketQWYdJNtgVnFOXy6sHMol3V_L9fGZj-ZD0HdIl0ZwsV5MJ-eE6m3rygdiGutLgDGk5OOQAjjhh9t0i2Y_wqZcV62GDUaAxOtHwH3
+      - ACEISS_API_KEY=EnYi1GDvulDXYlYlTZx0xmsMV4VKVPVGcrbe_YkqdNMNMSjAt5tXXkp4-o_RWx.1V6x7JgDYf6P2Yd5sObSZry9UdrGAu6RKGakMG0e9HhjfAZ09j98Gqw8g8EenAkAcdTR13GM31j1dMLEiJWb4V7ZYdrsf373E6j1IxDDNF0SpwtdSdgYxF8t9nmCyzvJgv4TcQWn2CAGustUub6ViezUE3pQoNiUWTf4GqX3z4_LdTy2miaZiYU5sMsxGj1PMBa2aDQmdhLtAUmL2jcgSSnMcNOQErWlSOZOewsReW
       - ACEISS_API_ENDPOINT=http://192.168.1.159:4318/
       - JAVA_OPTS=-javaagent:/agent/aceiss-javaagent.jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8089
 

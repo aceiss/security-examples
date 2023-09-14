@@ -149,6 +149,7 @@ public class MainController {
     userAccount.setLastName(lastName);
     userAccount.setAddress(address);
     userAccount.setUsername(username);
+    userAccount.setName(firstName + " " + lastName);
     userAccount.setEmail(username + "@aceiss.com");
     userAccount.setPassword(passwordEncoder.encode(password));
     userAccount.setEnabled("1");
