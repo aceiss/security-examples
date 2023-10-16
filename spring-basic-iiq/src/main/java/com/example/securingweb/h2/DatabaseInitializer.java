@@ -41,6 +41,9 @@ public class DatabaseInitializer {
                 jdbcTemplate.execute("insert into roles (username, role) "
                         + "values ('admin', 'USER')");
 
+                jdbcTemplate.execute("insert into roles (username, role) "
+                        + "values ('admin', 'USER_ETB')");
+
                 jdbcTemplate.execute("insert into employees (username, password, name, first_name, last_name, address, enabled, email) "
                         + "values ('catmgr', '" + encodedPwd + "', 'Adam Catty', 'Adam', 'Catty','12345 Harrison St.', 1, 'catmgr@aceiss.com')");
 
@@ -88,6 +91,24 @@ public class DatabaseInitializer {
 
                 jdbcTemplate.execute("insert into roles (username, role) "
                         + "values ('Charles.Harris', 'CATALOG_MGR')");
+
+                jdbcTemplate.execute("insert into employees (username, password, name, first_name, last_name, address, enabled, email) "
+                        + "values ('Allan.Burton', '" + encodedPwd + "', 'Allan Burton','Allan', 'Burton', '1244 Golf St.', 1, 'Allen.Burton@sailpointdemo.com')");
+
+                jdbcTemplate.execute("insert into roles (username, role) "
+                        + "values ('Allan.Burton', 'ADMIN')");
+
+                jdbcTemplate.execute("insert into roles (username, role) "
+                        + "values ('Allan.Burton', 'CATALOG_MGR')");
+
+                jdbcTemplate.execute("insert into employees (username, password, name, first_name, last_name, address, enabled, email) "
+                        + "values ('Andrea.Hudson', '" + encodedPwd + "', 'Andrea Hudson','Andrea', 'Hudson', '12434 Golfing St.', 1, 'Andrea.Hudson@sailpointdemo.com')");
+
+                jdbcTemplate.execute("insert into roles (username, role) "
+                        + "values ('Andrea.Hudson', 'ADMIN')");
+
+                jdbcTemplate.execute("insert into roles (username, role) "
+                        + "values ('Andrea.Hudson', 'CATALOG_MGR')");
             }
         };
     }
