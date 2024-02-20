@@ -1,0 +1,25 @@
+### Pass in the id of an Identity and return the attributes of that Identity
+POST {{host}}/login?username=BakerE&password=password
+Content-Type: text/html
+
+<username>{{username}}</username>
+<password>{{password}}</password>
+
+###
+POST {{host}}/login2?username=EdwardsB&password=password&firstName=Barry&lastName=Edwards&address=123StateStreet
+Content-Type: text/html
+
+<username>EdwardsB</username>
+<password>{{password}}</password>
+<firstName>Barry</firstName>
+<lastName>Edwards</lastName>
+<address>123 South State</address>
+
+
+###
+### Pass in the id of an Identity and return the attributes of that Identity
+GET {{host}}/isValid
+Cookie: {{cookie}}
+
+### Extract the received cookie from the response
+@cookie = {{response.headers['Set-Cookie']}}

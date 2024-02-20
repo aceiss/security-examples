@@ -24,16 +24,13 @@ public class SecuringWebApplication extends SpringBootServletInitializer{
     }
 
 	public static void main(String[] args) throws Throwable {
-        System.out.println("Eric Made it here 4");
 		SpringApplication.run(SecuringWebApplication.class, args);
 	}
     // Enable H2 Console
     @Bean
     public ServletRegistrationBean h2servletRegistration() {
-        System.out.println("Eric Made it here 1");
         ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
         registrationBean.addUrlMappings("/h2-console/*");
-        System.out.println("Eric Made it here 2");
         return registrationBean;
     }
 
@@ -60,7 +57,6 @@ public class SecuringWebApplication extends SpringBootServletInitializer{
 
     @Bean
     public CommandLineRunner init(DatabaseInitializer dataInitializationService) {
-        System.out.println("Eric Made it here 3");
         return args -> dataInitializationService.initializeData();
     }
 }

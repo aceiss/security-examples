@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Spring Security Example</title>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+        <h2><p th:utext="${jsonText}"></p></h2>
+
+        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+        <div sec:authorize="hasRole('ADMIN')">
+            <p>Click <a th:href="@{/register}">here</a> to see the registration page.</p>
+            <p>Click <a th:href="@{/admin}">here</a> to see the admin page.</p>
+            <p>Click <a th:href="@{/listUsers}">here</a> to see the list users page.</p>
+        </div>
+        <div sec:authorize="hasRole('CATALOG_MGR')">
+            <p>Click <a th:href="@{/catalog}">here</a> to see the catalog page.</p>
+        </div>
+        <div sec:authorize="hasRole('USER')">
+            <p>Click <a th:href="@{/user}">here</a> to see the user page.</p>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
+        <!--        <p>Click <a th:href="@{/admin}">here</a> to see the admin page.</p>-->
+<!--        <p>Click <a th:href="@{/catalog}">here</a> to see the catalog page.</p>-->
+
+        </body>
+</html>

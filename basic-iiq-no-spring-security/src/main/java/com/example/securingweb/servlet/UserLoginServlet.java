@@ -1,15 +1,13 @@
 package com.example.securingweb.servlet;
 
-import com.example.securingweb.h2.BadPasswordException;
-import com.example.securingweb.h2.CustomUserDetails;
-import com.example.securingweb.h2.DatabaseUserDetailsService;
-import com.example.securingweb.h2.UsernameNotFoundException;
+import com.example.securingweb.h2.*;
 import com.example.securingweb.util.EncoderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -44,7 +42,7 @@ public class UserLoginServlet extends HttpServlet {
             String encodedPwd = EncoderUtil.getSHA256(request.getParameter("password"));
             CustomUserDetails details = databaseUserDetails.loadUserByUsername(request.getParameter("userId").toString());
             session.setAttribute("principal",details);
-            session.setAttribute("roles","ROLE_ADMIN,ROLE_USER, ROLE_CATMGR");
+            session.setAttribute("roles",details.getAuthorities().stream().map(Role::getRole).collect(Collectors.joining(", ")));
             if(!encodedPwd.equals(details.getPassword())){
                 throw new BadPasswordException("Invalid Password for " + details.getUsername());
             }

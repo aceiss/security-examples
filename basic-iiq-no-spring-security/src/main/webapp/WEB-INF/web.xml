@@ -16,17 +16,17 @@
         <error-code>404</error-code>
         <location>/WEB-INF/error-404.html</location> <!-- /src/main/webapp/error-404.html-->
     </error-page>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <context-param>
-        <param-name>contextClass</param-name>
-        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-    </context-param>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>com.example.securingweb</param-value>
-    </context-param>
+<!--    <listener>-->
+<!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+<!--    </listener>-->
+<!--    <context-param>-->
+<!--        <param-name>contextClass</param-name>-->
+<!--        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>-->
+<!--    </context-param>-->
+<!--    <context-param>-->
+<!--        <param-name>contextConfigLocation</param-name>-->
+<!--        <param-value>com.example.securingweb</param-value>-->
+<!--    </context-param>-->
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/errorHandler</location>

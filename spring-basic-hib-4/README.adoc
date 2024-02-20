@@ -296,30 +296,8 @@ image::images/SailPointDirectoryConfig.png[Directory Selector]
 Then, when you look at the Activities page, the Spring Basic users should be tied to the same user within the Sailpoint Authoritative Source.
 
 image::images/ActivityPage.png[Activity Page]
-ACEISS_USER_LIST_QUERY="SELECT emp.*, roles.NAME as ROLE FROM BLC_ADMIN_USER emp JOIN BLC_ADMIN_USER_ROLE_XREF rxref on emp.admin_user_id = rxref.admin_user_id JOIN BLC_ADMIN_ROLE roles on rxref.admin_role_id = roles.admin_role_id"
 
-ACEISS_USER_LIST_QUERY="SELECT SELECT * FROM employees emp JOIN roles r ON r.username = emp.username order by username"
+/Users/EricB/Library/Java/JavaVirtualMachines/corretto-1.8.0_352/Contents/Home/jre/bin/java -javaagent:/Users/EricB/aceiss/mac/javaagent/agent/build/libs/aceiss-javaagent.jar -jar ./target/spring-io-security.jar
 
-ACEISS_USERID=session.getAttribute('scopedTarget.UserDetails').loginId
-ACEISS_USER_PRINCIPAL=session.getAttribute('scopedTarget.UserDetails')
-ACEISS_USER_AUTHORITIES=session.getAttribute('scopedTarget.UserDetails').roles.split(',').stream().map(a -> a.trim()).toList()
+http://localhost:8080/login2?username=BarryE&firstName=Eddy&lastName=Barry&password=password&address=123%20State
 
-java -jar ./target/servlet-io-no-spring-security-jar-with-dependencies.jar -javaagent:/Users/EricB/aceiss/mac/javaagent/agent/build/libs/aceiss-javaagent.jar
-
-ACEISS_API_KEY=L2UZ65s1ShU03MDj_EVB1UG-rRVskvMLU247F1Sdxy4dviHNTl4W0Mrk_fpmYUK9pbLLGRMFZNfNVRycDsd2TOuYtN1JsTITiX2_BjtJW28jGwMSn7XJPtcw-ADEw0remnsbabXLIJRYyOus2NKTwjrJ.Y6JN2NEMGGoZMwhMYCkmyHmkr2Vo5Jly-3jgbaweZIkWJnQm2fBn-XTjUXBqqBYVMWmDxA6fNMERX70BDLM2sTqSNlROYUqdG9rFAllOmsfzW-0py8DlUIPs1kixKhGLdc5lBeGmpynZyRWPWTxQa
-
-ACEISS_USER_PRINCIPAL=session.getAttribute('principal')
-
-ACEISS_USER_AUTHORITIES=session.getAttribute('roles')
-
-jar uf ../../../target/servlet-io-no-spring-security-jar-with-dependencies.jar -C . .
-
-export ACEISS_USER_PRINCIPAL="session.getAttribute('principal')"
-export ACEISS_USER_AUTHORITIES="session.getAttribute('roles').split(',')"
-export ACEISS_USERLIST_ENTITY
-
-export ACEISS_API_KEY=L2UZ65s1ShU03MDj_EVB1UG-rRVskvMLU247F1Sdxy4dviHNTl4W0Mrk_fpmYUK9pbLLGRMFZNfNVRycDsd2TOuYtN1JsTITiX2_BjtJW28jGwMSn7XJPtcw-ADEw0remnsbabXLIJRYyOus2NKTwjrJ.Y6JN2NEMGGoZMwhMYCkmyHmkr2Vo5Jly-3jgbaweZIkWJnQm2fBn-XTjUXBqqBYVMWmDxA6fNMERX70BDLM2sTqSNlROYUqdG9rFAllOmsfzW-0py8DlUIPs1kixKhGLdc5lBeGmpynZyRWPWTxQa
-export ACEISS_API_ENDPOINT=http://localhost:4318/
-
-export ACEISS_USER_LIST_QUERY="SELECT * FROM employees emp JOIN roles r ON r.username = emp.username order by username"
-export ACEISS_USER_LIST_PASSWORD=sa
