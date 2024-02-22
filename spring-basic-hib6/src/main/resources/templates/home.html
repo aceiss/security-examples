@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Spring Security Example</title>
     </head>
@@ -10,7 +10,6 @@
           <b>User Roles: </b>
           <div sec:authentication="authorities"></div>
         </div>
-<!--
         <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">User has role ADMIN ROLE.
           <p>Click <a th:href="@{/register}">here</a> to see the registration page.</p>
           <p>Click <a th:href="@{/admin}">here</a> to see the admin page.</p>
@@ -24,31 +23,9 @@
         <div th:if="${#authorization.expression('hasRole(''USER'')')}">User has role USER ROLE.
           <p>Click <a th:href="@{/user}">here</a> to see the user page.</p>
         </div>
--->
-<!--        <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}">-->
-<!--          3. User has authority ADMIN.-->
-<!--        </div>-->
-
-<!--        <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">-->
-<!--          3. User has authority USER.-->
-<!--        </div>-->
-
-        <span sec:authorize="isAuthenticated()">
-          <p>Click <a th:href="@{/register}">here</a> to see the registration page.</p>
-          <p>Click <a th:href="@{/admin}">here</a> to see the admin page.</p>
-          <p>Click <a th:href="@{/listUsers}">here</a> to see the list users page.</p>
-          <p>Click <a th:href="@{/catalog}">here</a> to see the catalog page.</p>
-          <p>Click <a th:href="@{/user}">here</a> to see the user page.</p>
-
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-                <a th:href="@{/logout}">Sign Out</a>
-        </span>
 
         <div sec:authorize="hasRole('USER')">User has role USER.</div>
         <div sec:authorize="hasRole('ADMIN')">User has role ADMIN.</div>
-        <div sec:authorize="hasAuthority('ROLE_ADMIN')">6. User has authority ADMIN.</div>
-        <div sec:authorize="hasAuthority('ROLE_USER')">6. User has authority USER.</div>
 
         <!--        <div th:if="${#strings.contains(#authentication.getAuthorities(), 'ROLE_USER')}">-->
 <!--          2. User has authority USER.-->

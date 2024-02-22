@@ -85,29 +85,32 @@ public class DatabaseInitializer {
 //                String encodedPwd = passwordEncoder.encode("password");
                 String encodedPwd = "password";
 
-/*
-                jdbcTemplate.execute("insert into employees (username, password, name, firstname, lastname, address, enabled, email) "
-                        + "values ('Sam.Cooper', '" + encodedPwd + "', 'Sam Cooper', 'Sam', 'Cooper','12323 State St.', 1, 'Sam.Cooper@demoexample.com')");
+                jdbcTemplate.execute("insert into employees (username, password, first_name, last_name, address, enabled) "
+                    + "values ('admin', '" + encodedPwd + "', 'Don', 'Admin','123 State St.', 1)");
 
                 jdbcTemplate.execute("insert into roles (username, role) "
-                        + "values ('Sam.Cooper', 'ADMIN')");
+                    + "values ('admin', 'ADMIN')");
 
                 jdbcTemplate.execute("insert into roles (username, role) "
-                        + "values ('Sam.Cooper', 'CATALOG_MGR')");
+                    + "values ('admin', 'CATALOG_MGR')");
 
                 jdbcTemplate.execute("insert into roles (username, role) "
-                        + "values ('Sam.Cooper', 'USER')");
+                    + "values ('admin', 'USER')");
 
-                jdbcTemplate.execute("insert into employees (username, password, name, firstname, lastname, address, enabled, email) "
-                    + "values ('Paul.Walker', '" + encodedPwd + "', 'Paul Walker', 'Paul', 'Walker','12323 State St.', 1, 'Paul.Walker@demoexample.com')");
-
-                jdbcTemplate.execute("insert into roles (username, role) "
-                    + "values ('Paul.Walker', 'ADMIN')");
+                jdbcTemplate.execute("insert into employees (username, password, first_name, last_name, address, enabled) "
+                    + "values ('catmgr', '" + encodedPwd + "', 'Adam', 'Catty','12345 Harrison St.', 1)");
 
                 jdbcTemplate.execute("insert into roles (username, role) "
-                    + "values ('Paul.Walker', 'CATALOG_MGR')");
-*/
+                    + "values ('catmgr', 'CATALOG_MGR')");
 
+                jdbcTemplate.execute("insert into roles (username, role) "
+                    + "values ('catmgr', 'USER')");
+
+                jdbcTemplate.execute("insert into employees (username, password, first_name, last_name, address, enabled) "
+                    + "values ('user', '" + encodedPwd + "', 'Matt', 'Useless','123 Maridian St.', 1)");
+
+                jdbcTemplate.execute("insert into roles (username, role) "
+                    + "values ('user', 'USER')");
 
                 jdbcTemplate.execute("insert into employees (username, password, name, firstname, lastname, address, enabled, email) "
                     + "values ('Jill.User', '" + encodedPwd + "', 'Jill User', 'Jill', 'User','1233 State St.', 1, 'Jill.User@aceiss.com')");

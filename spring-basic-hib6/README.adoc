@@ -296,9 +296,3 @@ image::images/SailPointDirectoryConfig.png[Directory Selector]
 Then, when you look at the Activities page, the Spring Basic users should be tied to the same user within the Sailpoint Authoritative Source.
 
 image::images/ActivityPage.png[Activity Page]
-
-/Users/EricB/Library/Java/JavaVirtualMachines/corretto-1.8.0_352/Contents/Home/jre/bin/java -javaagent:/Users/EricB/aceiss/mac/javaagent/agent/build/libs/aceiss-javaagent.jar -jar ./target/spring-io-security.jar
-
-http://localhost:8080/login2?username=BarryE&firstName=Eddy&lastName=Barry&password=password&address=123%20State
-
-https://mkyong.com/spring-boot/spring-boot-spring-security-thymeleaf-example/
