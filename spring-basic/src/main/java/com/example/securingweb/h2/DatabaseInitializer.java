@@ -41,6 +41,12 @@ public class DatabaseInitializer {
                 jdbcTemplate.execute("insert into roles (username, role) "
                         + "values ('admin', 'USER')");
 
+                jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+                        + "values ('admin', 'DEVELOPMENT_BU')");
+
+                jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+                        + "values ('admin', 'FINANCE_BU')");
+
                 jdbcTemplate.execute("insert into employees (username, password, first_name, last_name, address, enabled) "
                         + "values ('catmgr', '" + encodedPwd + "', 'Adam', 'Catty','12345 Harrison St.', 1)");
 
@@ -50,11 +56,24 @@ public class DatabaseInitializer {
                 jdbcTemplate.execute("insert into roles (username, role) "
                         + "values ('catmgr', 'USER')");
 
+                jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+                        + "values ('catmgr', 'CATALOG_BU')");
+
+                jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+                        + "values ('catmgr', 'FINANCE_BU')");
+
                 jdbcTemplate.execute("insert into employees (username, password, first_name, last_name, address, enabled) "
                         + "values ('user', '" + encodedPwd + "', 'Matt', 'Useless','123 Maridian St.', 1)");
 
                 jdbcTemplate.execute("insert into roles (username, role) "
                         + "values ('user', 'USER')");
+
+                jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+                        + "values ('user', 'USER_BU')");
+
+                jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+                        + "values ('user', 'FINANCE_BU')");
+
             }
         };
     }
