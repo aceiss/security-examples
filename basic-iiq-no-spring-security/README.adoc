@@ -304,9 +304,7 @@ ACEISS_USERID=session.getAttribute('scopedTarget.UserDetails').loginId
 ACEISS_USER_PRINCIPAL=session.getAttribute('scopedTarget.UserDetails')
 ACEISS_USER_AUTHORITIES=session.getAttribute('scopedTarget.UserDetails').roles.split(',').stream().map(a -> a.trim()).toList()
 
-java -jar ./target/servlet-io-no-spring-security-jar-with-dependencies.jar -javaagent:/Users/EricB/aceiss/mac/javaagent/agent/build/libs/aceiss-javaagent.jar
-
-ACEISS_API_KEY=L2UZ65s1ShU03MDj_EVB1UG-rRVskvMLU247F1Sdxy4dviHNTl4W0Mrk_fpmYUK9pbLLGRMFZNfNVRycDsd2TOuYtN1JsTITiX2_BjtJW28jGwMSn7XJPtcw-ADEw0remnsbabXLIJRYyOus2NKTwjrJ.Y6JN2NEMGGoZMwhMYCkmyHmkr2Vo5Jly-3jgbaweZIkWJnQm2fBn-XTjUXBqqBYVMWmDxA6fNMERX70BDLM2sTqSNlROYUqdG9rFAllOmsfzW-0py8DlUIPs1kixKhGLdc5lBeGmpynZyRWPWTxQa
+java -javaagent:/Users/EricB/aceiss/mac/javaagent/agent/build/libs/aceiss-javaagent.jar -jar ./target/basicNoSpringSec-jar-with-dependencies.jar
 
 ACEISS_USER_PRINCIPAL=session.getAttribute('principal')
 
@@ -316,10 +314,12 @@ jar uf ../../../target/servlet-io-no-spring-security-jar-with-dependencies.jar -
 
 export ACEISS_USER_PRINCIPAL="session.getAttribute('principal')"
 export ACEISS_USER_AUTHORITIES="session.getAttribute('roles').split(',')"
-export ACEISS_USERLIST_ENTITY
+unset ACEISS_USERLIST_ENTITY
 
 export ACEISS_API_KEY=L2UZ65s1ShU03MDj_EVB1UG-rRVskvMLU247F1Sdxy4dviHNTl4W0Mrk_fpmYUK9pbLLGRMFZNfNVRycDsd2TOuYtN1JsTITiX2_BjtJW28jGwMSn7XJPtcw-ADEw0remnsbabXLIJRYyOus2NKTwjrJ.Y6JN2NEMGGoZMwhMYCkmyHmkr2Vo5Jly-3jgbaweZIkWJnQm2fBn-XTjUXBqqBYVMWmDxA6fNMERX70BDLM2sTqSNlROYUqdG9rFAllOmsfzW-0py8DlUIPs1kixKhGLdc5lBeGmpynZyRWPWTxQa
 export ACEISS_API_ENDPOINT=http://localhost:4318/
 
 export ACEISS_USER_LIST_QUERY="SELECT * FROM employees emp JOIN roles r ON r.username = emp.username order by username"
 export ACEISS_USER_LIST_PASSWORD=sa
+
+http://localhost:8080/basicNoSpringSec/u_login?userId=MillerA&password=password

@@ -4,12 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "UserRoles")
-public class UserRole implements Serializable {
-
-//    @ManyToOne
-//    @JoinColumn(name="username", nullable=false)
-//    private User userAccount;
+@Table(name = "business_unit")
+public class BusinessUnit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +15,7 @@ public class UserRole implements Serializable {
     private String username;
 
     @Column(nullable = false, length = 30)
-    private String role;
+    private String businessUnit;
 
     public String getUsername() {
         return username;
@@ -29,12 +25,12 @@ public class UserRole implements Serializable {
         this.username = username;
     }
 
-    public String getRole() {
-        return role;
+    public String getBusinessUnit() {
+        return businessUnit;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setBusinessUnit(String businessUnit) {
+        this.businessUnit = businessUnit;
     }
 
     public Integer getId() {
@@ -45,11 +41,4 @@ public class UserRole implements Serializable {
         this.id = id;
     }
 
-    /*   public User getUserAccount() {
-        return userAccount;
-    }
-
-    public void setUserAccount(User userAccount) {
-        this.userAccount = userAccount;
-    }
-*/}
+}

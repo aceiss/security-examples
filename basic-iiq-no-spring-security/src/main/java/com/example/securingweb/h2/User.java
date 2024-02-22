@@ -1,5 +1,7 @@
 package com.example.securingweb.h2;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -109,4 +111,5 @@ public class User {
     public void setUserRoles(List<Role> userRoles) {
         this.userRoles = userRoles;
     }
+
 }

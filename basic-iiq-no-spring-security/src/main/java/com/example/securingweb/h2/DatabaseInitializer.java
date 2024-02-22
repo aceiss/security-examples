@@ -25,6 +25,51 @@ public class DatabaseInitializer {
         }
 
         jdbcTemplate.execute("insert into employees (username, password, name, first_name, last_name, address, enabled, email) "
+            + "values ('admin', '" + encodedPwd + "','Don Admin', 'Don', 'Admin','123 State St.', 1, 'admin@email.com')");
+
+        jdbcTemplate.execute("insert into roles (username, role) "
+            + "values ('admin', 'ADMIN')");
+
+        jdbcTemplate.execute("insert into roles (username, role) "
+            + "values ('admin', 'CATALOG_MGR')");
+
+        jdbcTemplate.execute("insert into roles (username, role) "
+            + "values ('admin', 'USER')");
+
+        jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+            + "values ('admin', 'DEVELOPMENT_BU')");
+
+        jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+            + "values ('admin', 'FINANCE_BU')");
+
+        jdbcTemplate.execute("insert into employees (username, password, name, first_name, last_name, address, enabled, email) "
+            + "values ('catmgr', '" + encodedPwd + "','Adam Catty', 'Adam', 'Catty','12345 Harrison St.', 1, 'catmgr@email.com')");
+
+        jdbcTemplate.execute("insert into roles (username, role) "
+            + "values ('catmgr', 'CATALOG_MGR')");
+
+        jdbcTemplate.execute("insert into roles (username, role) "
+            + "values ('catmgr', 'USER')");
+
+        jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+            + "values ('catmgr', 'CATALOG_BU')");
+
+        jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+            + "values ('catmgr', 'FINANCE_BU')");
+
+        jdbcTemplate.execute("insert into employees (username, password, name, first_name, last_name, address, enabled, email) "
+            + "values ('user', '" + encodedPwd + "', 'Matt Useless','Matt', 'Useless','123 Maridian St.', 1, 'user@email.com')");
+
+        jdbcTemplate.execute("insert into roles (username, role) "
+            + "values ('user', 'USER')");
+
+        jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+            + "values ('user', 'USER_BU')");
+
+        jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+            + "values ('user', 'FINANCE_BU')");
+
+        jdbcTemplate.execute("insert into employees (username, password, name, first_name, last_name, address, enabled, email) "
                         + "values ('Don.Admin', '" + encodedPwd + "', 'Don Admin', 'Don', 'Admin','12323 State St.', 1, 'Don.Admin@aceiss.com')");
 
                 jdbcTemplate.execute("insert into roles (username, role) "
@@ -35,6 +80,9 @@ public class DatabaseInitializer {
 
                 jdbcTemplate.execute("insert into roles (username, role) "
                         + "values ('Don.Admin', 'USER')");
+
+                jdbcTemplate.execute("insert into business_unit (username, business_unit) "
+                        + "values ('Don.Admin', 'ADMIN_BU')");
 
                 jdbcTemplate.execute("insert into employees (username, password, name, first_name, last_name, address, enabled, email) "
                         + "values ('Jill.User', '" + encodedPwd + "', 'Jill User', 'Jill', 'User','1233 State St.', 1, 'Jill.User@aceiss.com')");
@@ -89,6 +137,5 @@ public class DatabaseInitializer {
 
                 jdbcTemplate.execute("insert into roles (username, role) "
                         + "values ('Andrea.Hudson', 'CATALOG_MGR')");
-                System.out.println("MADE IT HERE END");
-    }
+     }
 }
