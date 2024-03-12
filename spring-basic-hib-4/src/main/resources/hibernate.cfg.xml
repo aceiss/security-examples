@@ -28,7 +28,7 @@
 
         <!-- Mention annotated entity class -->
         <mapping class="com.aceiss.springhib4.h2.User"/>
-        <mapping class="com.aceiss.springhib4.h2.UserRole"/>
+        <mapping class="com.aceiss.springhib4.h2.BusinessUnit"/>
         <mapping class="com.aceiss.springhib4.h2.Role"/>
     </session-factory>
 </hibernate-configuration>

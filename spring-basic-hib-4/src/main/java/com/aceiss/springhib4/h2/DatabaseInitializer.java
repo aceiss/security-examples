@@ -97,6 +97,12 @@ public class DatabaseInitializer {
                 jdbcTemplate.execute("insert into roles (username, role) "
                     + "values ('admin', 'USER')");
 
+                jdbcTemplate.execute("insert into business_unit (username, businessunit) "
+                        + "values ('admin', 'DEVELOPMENT_BU')");
+
+                jdbcTemplate.execute("insert into business_unit (username, businessunit) "
+                        + "values ('admin', 'FINANCE_BU')");
+
                 jdbcTemplate.execute("insert into employees (username, password, name, firstname, lastname, address, enabled, email) "
                     + "values ('catmgr', '" + encodedPwd + "','Adam Catty', 'Adam', 'Catty','12345 Harrison St.', 1, 'catmgr@mail.com')");
 
@@ -106,11 +112,23 @@ public class DatabaseInitializer {
                 jdbcTemplate.execute("insert into roles (username, role) "
                     + "values ('catmgr', 'USER')");
 
+                jdbcTemplate.execute("insert into business_unit (username, businessunit) "
+                        + "values ('catmgr', 'CATALOG_BU')");
+
+                jdbcTemplate.execute("insert into business_unit (username, businessunit) "
+                        + "values ('catmgr', 'FINANCE_BU')");
+
                 jdbcTemplate.execute("insert into employees (username, password, name, firstname, lastname, address, enabled, email) "
                     + "values ('user', '" + encodedPwd + "','Matt Useless', 'Matt', 'Useless','123 Maridian St.', 1,'user@email.com')");
 
                 jdbcTemplate.execute("insert into roles (username, role) "
                     + "values ('user', 'USER')");
+
+                jdbcTemplate.execute("insert into business_unit (username, businessunit) "
+                        + "values ('user', 'USER_BU')");
+
+                jdbcTemplate.execute("insert into business_unit (username, businessunit) "
+                        + "values ('user', 'FINANCE_BU')");
 
                 jdbcTemplate.execute("insert into employees (username, password, name, firstname, lastname, address, enabled, email) "
                     + "values ('Jill.User', '" + encodedPwd + "', 'Jill User', 'Jill', 'User','1233 State St.', 1, 'Jill.User@aceiss.com')");
