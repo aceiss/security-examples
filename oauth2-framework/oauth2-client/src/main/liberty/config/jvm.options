@@ -1,0 +1,4 @@
+-javaagent:/Users/EricB/aceiss/mac/javaagent/agent/build/libs/aceiss-javaagent.jar
+-Daceiss.config.file=/Users/EricB/javaagent-config/aceiss-javaagent-oauth.properties
+-Xdebug
+-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8010
