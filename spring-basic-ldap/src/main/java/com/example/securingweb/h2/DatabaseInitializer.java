@@ -55,6 +55,12 @@ public class DatabaseInitializer {
 
                 jdbcTemplate.execute("insert into roles (username, role) "
                         + "values ('user', 'USER')");
+
+                jdbcTemplate.execute("insert into employees (username, first_name, last_name, address, enabled) "
+                        + "values ('User Demo', 'User', 'Demo','123 State St.', 1)");
+
+                jdbcTemplate.execute("insert into roles (username, role) "
+                        + "values ('User Demo', 'ADMIN')");
             }
         };
     }

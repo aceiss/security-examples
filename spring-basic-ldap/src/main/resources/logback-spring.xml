@@ -1,0 +1,31 @@
+<!-- src/main/resources/logback-spring.xml -->
+
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/spring-basic-hib4.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--            <fileNamePattern>logs/spring-basic-iiq.%d{yyyy-MM-dd_HH}.log</fileNamePattern>-->
+            <fileNamePattern>logs/spring-basic-hib4.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>4</maxHistory>
+        </rollingPolicy>
+    </appender>
+<!--    <logger name="org.thymeleaf" level="TRACE" />-->
+<!--    <logger name="org.hibernate" level="WARN" />-->
+
+<!--    &lt;!&ndash; in order to debug some marshalling issues, this needs to be TRACE &ndash;&gt;-->
+    <logger name="org.springframework.security" level="ERROR" />
+<!--    <logger name="org.thymeleaf.extras" level="TRACE" />-->
+
+    <root level="ERROR">
+        <appender-ref ref="rollingFile" />
+    </root>
+</configuration>

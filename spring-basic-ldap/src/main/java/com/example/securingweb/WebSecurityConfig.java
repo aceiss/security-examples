@@ -6,6 +6,7 @@ import com.example.securingweb.ldap.CustomUserDetailsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,8 +23,11 @@ public class WebSecurityConfig {
 
 	private final UserAccountRepository userAccountRepository;
 
-	public WebSecurityConfig(UserAccountRepository userAccountRepository) {
+	private Environment env;
+
+	public WebSecurityConfig(UserAccountRepository userAccountRepository, Environment env) {
 		this.userAccountRepository = userAccountRepository;
+		this.env = env;
 	}
 
 	@Bean
@@ -55,18 +59,36 @@ public class WebSecurityConfig {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-				// https://spring.io/guides/gs/authenticating-ldap/
-				.ldapAuthentication()
-				.ldapAuthoritiesPopulator(new CustomAuthoritiesPopulator(userAccountRepository))
-				.userDetailsContextMapper(new CustomUserDetailsMapper())
-				.userDnPatterns("uid={0},ou=people")
-				.groupSearchBase("ou=groups")
-				.contextSource()
-				.url("ldap://localhost:8389/dc=springframework,dc=org")
-				.and()
-				.passwordCompare()
-				.passwordEncoder(new BCryptPasswordEncoder())
-				.passwordAttribute("userPassword");;
+
+		if(env.getProperty("spring.ldap.internal").equals("true")){
+			auth
+					// https://spring.io/guides/gs/authenticating-ldap/
+					.ldapAuthentication()
+					.ldapAuthoritiesPopulator(new CustomAuthoritiesPopulator(userAccountRepository))
+					.userDetailsContextMapper(new CustomUserDetailsMapper())
+					.userDnPatterns(env.getProperty("spring.ldap.embedded.dn-patterns"))
+					.groupSearchBase(env.getProperty("spring.ldap.embedded.search-base"))
+					.contextSource()
+					.url(env.getProperty("spring.ldap.embedded.urls"))
+					.and()
+					.passwordCompare()
+					.passwordEncoder(new BCryptPasswordEncoder())
+					.passwordAttribute("userPassword");;
+
+		} else {
+			auth
+					// https://spring.io/guides/gs/authenticating-ldap/
+					.ldapAuthentication()
+					.userDetailsContextMapper(new CustomUserDetailsMapper())
+					.ldapAuthoritiesPopulator(new CustomAuthoritiesPopulator(userAccountRepository))
+					.userDnPatterns(env.getProperty("spring.ldap.dn-patterns"))
+					.userSearchBase(env.getProperty("spring.ldap.search-base"))
+					.contextSource()
+					.url(env.getProperty("spring.ldap.urls"))
+					.managerDn(env.getProperty("spring.ldap.manager-dn"))
+					.managerPassword(env.getProperty("spring.ldap.password"));
+
+		}
+
 	}
 }
