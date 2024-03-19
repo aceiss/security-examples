@@ -40,7 +40,14 @@ public class DownstreamCallServlet extends HttpServlet {
             response = invocationBuilder
                     .header("authorization", tokenResponse.getString("access_token"))
                     .post(Entity.text("body string"), String.class);
+        } else if ("catmgr".equals(action)) {
+            resourceWebTarget = webTarget.path("resource/catmgr");
+            Invocation.Builder invocationBuilder = resourceWebTarget.request();
+            response = invocationBuilder
+                    .header("authorization", tokenResponse.getString("access_token"))
+                    .get(String.class);
         }
+
         PrintWriter out = resp.getWriter();
         out.println(response);
         out.flush();

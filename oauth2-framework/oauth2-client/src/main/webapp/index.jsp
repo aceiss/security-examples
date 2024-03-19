@@ -95,6 +95,7 @@
         <li><a href="refreshtoken">Refresh token (original scope)</a></li>
         <li><a href="refreshtoken?scope=resource.read">Refresh token (scope: resource.read)</a></li>
         <li><a href="refreshtoken?scope=resource.write">Refresh token (scope: resource.write)</a></li>
+        <li><a href="refreshtoken?scope=resource.catmgr">Refresh token (scope: resource.catmgr)</a></li>
     </ul>
 </div>
 
@@ -104,6 +105,7 @@
     <ul>
         <li><a href="downstream?action=read">Read Protected Resource</a></li>
         <li><a href="downstream?action=write">Write Protected Resource</a></li>
+        <li><a href="downstream?action=catmgr">Read Protected CatMgr Resource</a></li>
     </ul>
 </div>
 

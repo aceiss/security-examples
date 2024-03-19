@@ -35,4 +35,14 @@ public class ProtectedResource {
                 .header("location", UUID.randomUUID().toString())
                 .build();
     }
+
+    @GET
+    @RolesAllowed("resource.catmgr")
+    @Path("/catmgr")
+    public Response catmgr() {
+        //DoStaff
+        return Response.ok("Hello Catalog Manager, " + principal.getName())
+                .header("location", UUID.randomUUID().toString())
+                .build();
+    }
 }
