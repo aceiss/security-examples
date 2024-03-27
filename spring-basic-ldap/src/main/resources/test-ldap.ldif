@@ -4,12 +4,12 @@ objectclass: domain
 objectclass: extensibleObject
 dc: springframework
 
-dn: ou=groups,dc=springframework,dc=org
+dn: ou=Groups,dc=springframework,dc=org
 objectclass: top
 objectclass: organizationalUnit
 ou: groups
 
-dn: ou=subgroups,ou=groups,dc=springframework,dc=org
+dn: ou=subgroups,ou=Groups,dc=springframework,dc=org
 objectclass: top
 objectclass: organizationalUnit
 ou: subgroups
@@ -34,6 +34,27 @@ objectclass: top
 objectclass: organizationalUnit
 ou: otherpeople
 
+dn: cn=CATALOG_MGR,ou=Groups,dc=springframework,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: CATALOG_MGR
+uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
+uniqueMember: uid=catmgr,ou=people,dc=springframework,dc=org
+
+dn: cn=ADMIN,ou=Groups,dc=springframework,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: ADMIN
+uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
+
+dn: cn=USER,ou=Groups,dc=springframework,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: USER
+uniqueMember: uid=user,ou=people,dc=springframework,dc=org
+uniqueMember: uid=catmgr,ou=people,dc=springframework,dc=org
+uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
+
 dn: uid=user,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
@@ -42,7 +63,13 @@ objectclass: inetOrgPerson
 cn: Ben Alex
 sn: Alex
 uid: user
-userPassword: $2a$10$8bUzf2SwvJiyTnP0Q46mcOUVbso5VTeoRJGMq63Nhezc6INEDGu/.
+userPassword: password
+l:Denver
+st:Colorado
+mail:user@aceiss.com
+givenName:Ben
+description:Design
+o:Designing
 
 dn: uid=admin,ou=people,dc=springframework,dc=org
 objectclass: top
@@ -52,7 +79,13 @@ objectclass: inetOrgPerson
 cn: Andy Hamilton
 sn: Hamilton
 uid: admin
-userPassword: $2a$10$8bUzf2SwvJiyTnP0Q46mcOUVbso5VTeoRJGMq63Nhezc6INEDGu/.
+userPassword: password
+l:Salt Lake
+st:Utah
+mail:admin@aceiss.com
+givenName:Andy
+description:Engineer
+o:Engineering
 
 dn: uid=catmgr,ou=people,dc=springframework,dc=org
 objectclass: top
@@ -62,4 +95,11 @@ objectclass: inetOrgPerson
 cn: Eric Allen
 sn: Allen
 uid: catmgr
-userPassword: $2a$10$8bUzf2SwvJiyTnP0Q46mcOUVbso5VTeoRJGMq63Nhezc6INEDGu/.
+userPassword: password
+l:Boise
+st:Idaho
+mail:ericbaker@aceiss.com
+givenName:Eric
+description:Senior Engineer
+o:Development
+

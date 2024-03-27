@@ -22,7 +22,9 @@
 <!--    <logger name="org.hibernate" level="WARN" />-->
 
 <!--    &lt;!&ndash; in order to debug some marshalling issues, this needs to be TRACE &ndash;&gt;-->
-    <logger name="org.springframework.security" level="ERROR" />
+    <logger name="org.springframework.ldap" level="ERROR" />
+    <logger name="com.unboundid" level="ERROR" />
+
 <!--    <logger name="org.thymeleaf.extras" level="TRACE" />-->
 
     <root level="ERROR">
