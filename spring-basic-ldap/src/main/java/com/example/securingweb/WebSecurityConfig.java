@@ -89,6 +89,7 @@ public class WebSecurityConfig {
 					.ldapAuthentication()
 					.ldapAuthoritiesPopulator(new CustomLDAPAuthoritiesPopulator(env))
 					.userDetailsContextMapper(new CustomUserDetailsMapper())
+//					.userSearchBase(env.getProperty("spring.ldap.embedded.base-dn"))
 					.userDnPatterns(env.getProperty("spring.ldap.embedded.dn-patterns"))
 					.groupSearchBase(env.getProperty("spring.ldap.embedded.search-base"))
 					.contextSource()
@@ -106,7 +107,7 @@ public class WebSecurityConfig {
 					// https://spring.io/guides/gs/authenticating-ldap/
 					.ldapAuthentication()
 					.userDetailsContextMapper(new CustomUserDetailsMapper())
-					.ldapAuthoritiesPopulator(new CustomAuthoritiesPopulator(userAccountRepository))
+					.ldapAuthoritiesPopulator(new CustomLDAPAuthoritiesPopulator(env))
 					.userDnPatterns(env.getProperty("spring.ldap.dn-patterns"))
 					.userSearchBase(env.getProperty("spring.ldap.search-base"))
 					.contextSource()
