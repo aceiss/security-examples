@@ -19,10 +19,15 @@ objectclass: top
 objectclass: organizationalUnit
 ou: people
 
-dn: ou=space cadets,dc=springframework,dc=org
+dn: ou=developer,dc=springframework,dc=org
 objectclass: top
 objectclass: organizationalUnit
-ou: space cadets
+ou: developer
+
+dn: ou=design,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: design
 
 dn: ou=\"quoted people\",dc=springframework,dc=org
 objectclass: top
@@ -34,28 +39,39 @@ objectclass: top
 objectclass: organizationalUnit
 ou: otherpeople
 
-dn: cn=CATALOG_MGR,ou=Groups,dc=springframework,dc=org
+dn: cn=SecurityExample.CATALOG_MGR,ou=Groups,dc=springframework,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
-cn: CATALOG_MGR
-uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
-uniqueMember: uid=catmgr,ou=people,dc=springframework,dc=org
+cn: SecurityExample.CATALOG_MGR
+uniqueMember: uid=admin,ou=developer,dc=springframework,dc=org
+uniqueMember: uid=catmgr,ou=design,dc=springframework,dc=org
+uniqueMember: uid=User Demo,ou=developer,dc=springframework,dc=org
 
-dn: cn=ADMIN,ou=Groups,dc=springframework,dc=org
+dn: cn=SecurityExample.ADMIN,ou=Groups,dc=springframework,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
-cn: ADMIN
-uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
+cn: SecurityExample.ADMIN
+uniqueMember: uid=admin,ou=developer,dc=springframework,dc=org
 
-dn: cn=USER,ou=Groups,dc=springframework,dc=org
+dn: cn=SecurityExample.USER,ou=Groups,dc=springframework,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
-cn: USER
-uniqueMember: uid=user,ou=people,dc=springframework,dc=org
-uniqueMember: uid=catmgr,ou=people,dc=springframework,dc=org
-uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
+cn: SecurityExample.USER
+uniqueMember: uid=user,ou=developer,dc=springframework,dc=org
+uniqueMember: uid=catmgr,ou=design,dc=springframework,dc=org
+uniqueMember: uid=admin,ou=developer,dc=springframework,dc=org
+uniqueMember: uid=User Demo,ou=developer,dc=springframework,dc=org
 
-dn: uid=user,ou=people,dc=springframework,dc=org
+dn: cn=AceissDevelopers,ou=Groups,dc=springframework,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: AceissDevelopers
+uniqueMember: uid=user,ou=developer,dc=springframework,dc=org
+uniqueMember: uid=catmgr,ou=design,dc=springframework,dc=org
+uniqueMember: uid=admin,ou=developer,dc=springframework,dc=org
+uniqueMember: uid=User Demo,ou=developer,dc=springframework,dc=org
+
+dn: uid=user,ou=developer,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -71,7 +87,7 @@ givenName:Ben
 description:Design
 o:Designing
 
-dn: uid=admin,ou=people,dc=springframework,dc=org
+dn: uid=admin,ou=developer,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -87,7 +103,23 @@ givenName:Andy
 description:Engineer
 o:Engineering
 
-dn: uid=catmgr,ou=people,dc=springframework,dc=org
+dn: uid=User Demo,ou=developer,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: User Demo
+sn: Demo
+uid: User Demo
+userPassword: password
+l:Salt Lake
+st:Utah
+mail:UDemo@aceiss.com
+givenName:User
+description:Engineer
+o:Engineering
+
+dn: uid=catmgr,ou=design,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -101,5 +133,5 @@ st:Idaho
 mail:ericbaker@aceiss.com
 givenName:Eric
 description:Senior Engineer
-o:Development
+o:Design
 

@@ -86,12 +86,15 @@ public class CustomLDAPAuthoritiesPopulator implements LdapAuthoritiesPopulator 
                 if (part.trim().startsWith("CN=")) {
                     // Extract the value after "cn="
                     authority = part.trim().substring(3);
-                    break;
+                    String[] parsedValues = authority.split("\\.");
+                    if (parsedValues.length == 2 && parsedValues[0].equals("SecurityExample")){
+                        authority = parsedValues[1];
+                        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority);
+                        grantedAuthorities.add(grantedAuthority);
+                    }
                 }
             }
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority);
-            grantedAuthorities.add(grantedAuthority);
-        }
+         }
     }
 
     private static void extractAuthoritiesInternal(String userCn, String baseDn, LDAPConnection ldapConnection, Collection<GrantedAuthority> grantedAuthorities, String userDn) throws LDAPSearchException {
@@ -111,17 +114,15 @@ public class CustomLDAPAuthoritiesPopulator implements LdapAuthoritiesPopulator 
         for (SearchResultEntry groupEntry : searchResult.getSearchEntries()) {
             // Print group CN or any other relevant information
 
-            String[] parts = groupEntry.getDN().split(",");
             String authority = null;
-            for (String part : parts) {
-                if (part.trim().startsWith("cn=")) {
-                    // Extract the value after "cn="
-                    authority = part.trim().substring(3);
-                    break;
-                }
+            Attribute attribute = groupEntry.getAttribute("cn");
+            String cnValue = attribute.getValue();
+            String[] parsedValues = cnValue.split("\\.");
+            if (parsedValues.length == 2 && parsedValues[0].equals("SecurityExample")){
+                authority = parsedValues[1];
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority);
+                grantedAuthorities.add(grantedAuthority);
             }
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority);
-            grantedAuthorities.add(grantedAuthority);
         }
     }
 }

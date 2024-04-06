@@ -73,20 +73,20 @@ public class MainController {
 
   // Login form
   @RequestMapping(value = "/admin" , method = {RequestMethod.GET, RequestMethod.POST})
-  @PreAuthorize("hasRole('ADMIN') || hasRole('SUP_ADMIN')")
+  @PreAuthorize("hasRole('AceissManagers') || hasRole('ADMIN') || hasRole('SUP_ADMIN')")
   public String admin() {
     return "admin.html";
   }
 
   // Login form
-  @PreAuthorize("hasRole('CATALOG_MGR') || hasRole('ADMIN')")
+  @PreAuthorize("hasRole('AceissDataAnalytics') || hasRole('AceissManagers') || hasRole('CATALOG_MGR') || hasRole('ADMIN')")
   @RequestMapping(value = "/catalog" , method = {RequestMethod.GET, RequestMethod.POST})
   public String catalog() {
     return "catalog.html";
   }
 
   // Login form
-  @PreAuthorize("hasRole('USER')")
+  @PreAuthorize("hasRole('Users') || hasRole('USER')")
   @RequestMapping(value = "/user" , method = {RequestMethod.GET, RequestMethod.POST})
   public String user() {
     return "user.html";
@@ -108,7 +108,7 @@ public class MainController {
   }
 
   @RequestMapping(value = "/listUsers" , method = {RequestMethod.GET, RequestMethod.POST})
-  @PreAuthorize("hasRole('ADMIN') || hasRole('SUP_ADMIN')")
+  @PreAuthorize("hasRole('AceissManagers') || hasRole('SUP_ADMIN') || hasRole('ADMIN')")
   public String listUsers(Model model) {
 
     model.addAttribute("users",userAccountRepository.findAll());
@@ -133,7 +133,7 @@ public class MainController {
     userAccount.setEnabled("1");
     Role role = new Role();
     role.setUsername(username);
-    role.setRole("ADMIN");
+    role.setRole("AceissManagers");
     createLdapEntry(userAccount,userPassword);
     userAccountRepository.save(userAccount);
     return roleRepository.save(role);
